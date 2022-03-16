@@ -1,6 +1,0 @@
-server:
-  port: 9100
-
-spring:
-  freemarker:
-    expose-request-attributes: true
