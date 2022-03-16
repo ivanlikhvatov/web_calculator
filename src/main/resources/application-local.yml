@@ -4,7 +4,3 @@ server:
 spring:
   freemarker:
     expose-request-attributes: true
-
-java:
-  runtime:
-    version: 11
