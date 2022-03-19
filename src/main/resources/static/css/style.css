@@ -1,0 +1,24 @@
+button {
+    margin: 2px;
+}
+
+.small-btn {
+    width: 62px;
+}
+
+.notation-btn {
+    width: 80px;
+}
+
+.solve-equation-btn {
+    height: 205px;
+}
+
+#display {
+    background: #bcbcbc;
+    padding: 8px;
+    margin:16px 12px 10px 16px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    border-radius:8px;
+}
