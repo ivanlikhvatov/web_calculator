@@ -21,56 +21,56 @@
             <h3>Royals Calculator</h3>
         </div>
 
-        <div id="display">
-            <div id="result"><p>0</p></div>
-            <div id="previous"><p>0</p></div>
-        </div>
-
         <div class="container text-center" id="calculator">
+
+            <div id="display">
+                <div id="result"><p>0</p></div>
+                <div id="previous"><p>0</p></div>
+            </div>
 
             <div class="row justify-content-md-center">
                 <div class="col-md-auto">
                     <div class="row justify-content-md-center">
                         <button class="btn small-btn" value="ac">AC</button>
                         <button class="btn small-btn" value="ce">CE</button>
-                        <button class="btn small-btn" value="+/-">+/-</button>
+                        <button class="btn small-btn" value=".">.</button>
                         <button class="btn small-btn" value="/">/</button>
                         <button class="btn notation-btn" value="2 -> 10">2 -> 10</button>
                     </div>
                     <div class="row justify-content-md-center">
-                        <button class="btn small-btn" value="ac">AC</button>
-                        <button class="btn small-btn" value="ce">CE</button>
-                        <button class="btn small-btn" value="+/-">+/-</button>
-                        <button class="btn small-btn" value="/">/</button>
-                        <button class="btn notation-btn" value="2 -> 10">2 -> 10</button>
+                        <button class="btn small-btn" value="7">7</button>
+                        <button class="btn small-btn" value="8">8</button>
+                        <button class="btn small-btn" value="9">9</button>
+                        <button class="btn small-btn" value="*">*</button>
+                        <button class="btn notation-btn" value="10 -> 2">10 -> 2</button>
                     </div>
                     <div class="row justify-content-md-center">
-                        <button class="btn small-btn" value="ac">AC</button>
-                        <button class="btn small-btn" value="ce">CE</button>
-                        <button class="btn small-btn" value="+/-">+/-</button>
-                        <button class="btn small-btn" value="/">/</button>
-                        <button class="btn notation-btn" value="2 -> 10">2 -> 10</button>
+                        <button class="btn small-btn" value="4">4</button>
+                        <button class="btn small-btn" value="5">5</button>
+                        <button class="btn small-btn" value="6">6</button>
+                        <button class="btn small-btn" value="-">-</button>
+                        <button class="btn notation-btn" value="16 -> 10">16 -> 10</button>
                     </div>
                     <div class="row justify-content-md-center">
-                        <button class="btn small-btn" value="ac">AC</button>
-                        <button class="btn small-btn" value="ce">CE</button>
-                        <button class="btn small-btn" value="+/-">+/-</button>
-                        <button class="btn small-btn" value="/">/</button>
-                        <button class="btn notation-btn" value="2 -> 10">2 -> 10</button>
+                        <button class="btn small-btn" value="1">1</button>
+                        <button class="btn small-btn" value="2">2</button>
+                        <button class="btn small-btn" value="3">3</button>
+                        <button class="btn small-btn" value="+">+</button>
+                        <button class="btn notation-btn" value="10 -> 16">10 -> 16</button>
                     </div>
                     <div class="row justify-content-md-center">
-                        <button class="btn small-btn" value="ac">AC</button>
-                        <button class="btn small-btn" value="ce">CE</button>
-                        <button class="btn small-btn" value="+/-">+/-</button>
-                        <button class="btn small-btn" value="/">/</button>
-                        <button class="btn notation-btn" value="2 -> 10">2 -> 10</button>
+                        <button class="btn small-btn" value="0">0</button>
+                        <button class="btn small-btn" value="pi">𝝅</button>
+                        <button class="btn small-btn" value="exp">exp</button>
+                        <button class="btn small-btn" value="=">=</button>
+                        <button class="btn notation-btn" value="16 -> 2">16 -> 2</button>
                     </div>
                 </div>
 
 
                 <div class="col-md-auto d-grid gap-2">
                     <div class="row justify-content-md-center">
-                        <button class="btn solve-equation-btn" value="/">Решить ур-ие</button>
+                        <button class="btn solve-equation-btn" value="solve-equation">Решить ур-ие</button>
                     </div>
                 </div>
             </div>

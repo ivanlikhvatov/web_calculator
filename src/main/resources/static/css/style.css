@@ -22,3 +22,19 @@ button {
     font-family: 'Share Tech Mono', monospace;
     border-radius:8px;
 }
+
+#calculator {
+    background: chocolate;
+    max-width: 600px;
+    border-radius:8px;
+    padding: 8px;
+}
+
+#result p{
+    font-size:1.8em;
+}
+
+#result,
+#previous {
+    text-align: right;
+}
