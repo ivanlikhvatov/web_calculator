@@ -23,52 +23,70 @@ $(document).ready(function() {
 
     $(BUTTON).click(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
-
-        if (entry === "ac") {
-            deleteAll();
-			deleteLastNum();
-            return;
-        }
-
-        if (entry === "ce") {
-            deleteLastNum();
-            return;
-        }
-
-        if (entry === "pi" || entry === "exp") {
-            addConstNumber();
-            return;
-        }
-
-        if (currentNotation !== DECIMAL && notationOperationsArray.indexOf(entry) === -1) {
-            alert("Сначала переведите число в десятичную сс");
-            return;
-        }
-
-        if (!isNaN(entry)) {
-            processNumber();
-        }
-
-        if (entry === "="){
-            solveNumbersOperation();
-        }
-
-        if (operationSymbolsArray.indexOf(entry) !== -1) {
-            addOperationSymbolOrPoint();
-        }
-
-        if (notationOperationsArray.indexOf(entry) !== -1) {
-            changeNotation();
-        }
-
-        checkExpressionLength();
-
-        if (result.indexOf(".") !== -1) {
-            result = result.truncate()
-        }
-
+		onModeSelected();
     })
 })
+
+function onModeSelected() {
+	if (entry === "ac") {
+		deleteAll();
+		deleteLastNum();
+		return;
+	}
+
+	if (entry === "ce") {
+		deleteLastNum();
+		return;
+	}
+
+	if (entry === "pi" || entry === "exp") {
+		addConstNumber();
+		return;
+	}
+
+	if (currentNotation !== DECIMAL && notationOperationsArray.indexOf(entry) === -1) {
+		alert("Сначала переведите число в десятичную сс");
+		return;
+	}
+
+	if (!isNaN(entry)) {
+		processNumber();
+	}
+
+	if (entry === "="){
+		solveNumbersOperation();
+	}
+
+	if (operationSymbolsArray.indexOf(entry) !== -1) {
+		addOperationSymbolOrPoint();
+	}
+
+	if (notationOperationsArray.indexOf(entry) !== -1) {
+		changeNotation();
+	}
+
+	checkExpressionLength();
+
+	if (result.indexOf(".") !== -1) {
+		result = result.truncate()
+	}
+}
+
+document.addEventListener('keydown', onKeyDown);
+
+function onKeyDown(key) {
+	switch (key.code) {
+		case "Digit1": {
+			entry = 1;
+		}
+
+		default: {
+            entry = 5;
+        }
+	}
+
+	onModeSelected();
+}
 
 function deleteAll() {
     entry = "";
@@ -157,11 +175,11 @@ function processNumber() {
         expression = entry;
         currentNumber = entry;
         reset = false;
-    }
-    else {
+    } else {
         expression += entry;
         currentNumber += entry;
     }
+
     $('#previous p').html(expression);
     $('#result p').html(currentNumber);
 }
