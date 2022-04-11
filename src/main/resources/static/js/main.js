@@ -26,6 +26,7 @@ $(document).ready(function() {
 
         if (entry === "ac") {
             deleteAll();
+			deleteLastNum();
             return;
         }
 
@@ -70,10 +71,10 @@ $(document).ready(function() {
 })
 
 function deleteAll() {
-    entry = "0";
-    expression = "0";
-    result = "0";
-    currentNumber = "0";
+    entry = "";
+    expression = "";
+    result = "";
+    currentNumber = "";
     $('#result p').html(entry);
     $('#previous p').html(expression);
 }
@@ -82,10 +83,9 @@ function deleteLastNum() {
     if (expression.length > 1) {
         expression = expression.slice(0, -1);
         $('#previous p').html(expression);
-    }
-    else {
+    } else {
         expression = 0;
-        $('#result p').html(0);
+        $('#result p').html("");
     }
 
     $('#previous p').html(expression);
@@ -96,7 +96,7 @@ function deleteLastNum() {
     }
     else {
         currentNumber = 0;
-        $('#result p').html(0);
+        $('#result p').html("");
     }
 }
 
