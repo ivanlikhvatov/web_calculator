@@ -13,7 +13,7 @@
         <script src="/static/js/main.js"></script>
     </head>
 
-    <body>
+    <body style="background: url('/static/images/background.png') no-repeat">
 
 <div class="container text-center">
 
@@ -21,7 +21,7 @@
             <h3>Royals Calculator</h3>
         </div>
 
-        <div class="container text-center" id="calculator" style="background: url('/static/images/background.png') no-repeat">
+        <div class="container text-center" id="calculator">
 
             <div id="display" style="background: url('/static/images/display.png') no-repeat">
                 <div id="result"><p>0</p></div>
