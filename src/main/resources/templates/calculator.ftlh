@@ -15,13 +15,13 @@
 
     <body>
 
-    <div class="container text-center">
+<div class="container text-center">
 
         <div id="header">
             <h3>Royals Calculator</h3>
         </div>
 
-        <div class="container text-center" id="calculator">
+        <div class="container text-center" id="calculator" style="background-image: url('/static/images/background.png')">
 
             <div id="display">
                 <div id="result"><p>0</p></div>
