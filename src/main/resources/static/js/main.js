@@ -30,9 +30,9 @@ $(document).ready(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
 		onModeSelected();
     })
-
-    $(document).addEventListener('keydown', onKeyDown);
 })
+
+$(document).addEventListener('keydown', onKeyDown);
 
 function onModeSelected() {
 	if (entry === "ac") {
