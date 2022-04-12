@@ -33,7 +33,7 @@
                     <div class="row justify-content-md-center">
                         <button class="btn small-btn" value="ac" id="ac" style="background-image: url('/static/images/ac.png')"></button>
                         <button class="btn small-btn" value="ce" id="ce" style="background-image: url('/static/images/ce.png')"></button>
-                        <button class="btn small-btn" value="."  id="tochka" ></button>
+                        <button class="btn small-btn" value="."  id="tochka" style="background-image: url('/static/images/mark.png')"></button>
                         <button class="btn small-btn" value="/"  id="divide" style="background-image: url('/static/images/divide.png')">/</button>
                         <button class="btn notation-btn" value="2 -> 10" id="binToDecimal" style="background-image: url('/static/images/binToDecimal.png')"></button>
                     </div>
