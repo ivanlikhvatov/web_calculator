@@ -22,6 +22,8 @@ var notationOperationsArray = ["10 -> 2", "2 -> 10", "16 -> 10", "10 -> 16", "16
 
 var delZeroPattern = "/.*/0[.]*[0]*[/*\\-+].*/";
 
+const eq = document.getElementById('eq');
+
 //TODO не дает писать много нулей после точки и вообще нули
 
 $(document).ready(function() {
@@ -32,7 +34,7 @@ $(document).ready(function() {
     })
 })
 
-document.addEventListener('keydown', onKeyDown);
+eq.addEventListener('keydown', onKeyDown);
 
 function onModeSelected() {
 	if (entry === "ac") {
@@ -89,9 +91,9 @@ function onModeSelected() {
 }
 
 function onKeyDown(key) {
-    if (!isEquationMode) {
+    /*if (!isEquationMode) {
         return;
-    }
+    }*/
 
 	switch (key.code) {
 		case "Digit1": {

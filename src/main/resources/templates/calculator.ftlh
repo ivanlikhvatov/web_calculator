@@ -70,7 +70,7 @@
 
                 <div class="col-md-auto d-grid gap-2">
                     <div class="row justify-content-md-center">
-                        <button class="btn solve-equation-btn" value="solve-equation" style="background: url('/static/images/solve.png') no-repeat"></button>
+                        <button class="btn solve-equation-btn" id="eq" value="solve-equation" style="background: url('/static/images/solve.png') no-repeat"></button>
                     </div>
                 </div>
             </div>
