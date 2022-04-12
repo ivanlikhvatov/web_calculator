@@ -3,7 +3,8 @@ button {
 }
 
 .small-btn {
-    width: 62px;
+    width: 49px;
+    height: 30px;
 }
 
 .notation-btn {
@@ -30,7 +31,8 @@ button {
 
 #calculator {
 	background-image: url('/static/images/background.png');
-    max-width: 600px;
+    max-width: 1920px;
+    max-height: 1080px;
     border-radius:8px;
     padding: 8px;
 }
