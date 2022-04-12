@@ -24,8 +24,6 @@ var delZeroPattern = "/.*/0[.]*[0]*[/*\\-+].*/";
 
 var eq;
 
-//TODO не дает писать много нулей после точки и вообще нули
-
 $(document).ready(function() {
 
     eq = document.getElementById('eq');
@@ -394,7 +392,7 @@ function isExpressionValid() {
     if (operationSymbolsArray.indexOf(lastSymbol) !== -1) {
         return false;
     }
-    // "/.*/0[.]*[0]*[/*\\-+].*/"
+
     var tmp = expression;
 
     if (tmp.match( "^.*/0[.]*[0]*$") !== null || tmp.match( ".*/0[.]*[0]*[+\\-*/]") !== null) {
