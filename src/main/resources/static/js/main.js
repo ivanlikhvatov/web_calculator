@@ -28,13 +28,13 @@ var eq;
 
 $(document).ready(function() {
 
+    eq = document.getElementById('eq');
+    eq.onkeydown = onKeyDown;
+
     $(BUTTON).click(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
 		onModeSelected();
     })
-
-    eq = document.getElementById('eq');
-    eq.addEventListener('keydown', onKeyDown);
 })
 
 function onModeSelected() {
