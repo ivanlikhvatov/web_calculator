@@ -13,6 +13,7 @@ var entry = "";
 var currentNumber = "0";
 var result = "0";
 var reset = false;
+var isEquationMode = false;
 
 var currentNotation = DECIMAL;
 
@@ -69,7 +70,8 @@ function onModeSelected() {
 	}
 
     if (entry === "solve-equation") {
-        solveEquation();
+        alert('Включен режим уравнений. Используйте ввод с клавиатуры')
+        isEquationMode = true;
     }
 
 	checkExpressionLength();
@@ -79,9 +81,13 @@ function onModeSelected() {
 	}
 }
 
-document.addEventListener('keydown', onKeyDown);
+$(document).addEventListener('keydown', onKeyDown);
 
 function onKeyDown(key) {
+    if (!isEquationMode) {
+        return;
+    }
+
 	switch (key.code) {
 		case "Digit1": {
 			entry = 1;
@@ -91,6 +97,8 @@ function onKeyDown(key) {
             entry = 5;
         }
 	}
+
+    alert(entry)
 
 	onModeSelected();
 }
