@@ -32,7 +32,7 @@ $(document).ready(function() {
     })
 })
 
-$(document).addEventListener('keydown', onKeyDown);
+document.addEventListener('keydown', onKeyDown);
 
 function onModeSelected() {
 	if (entry === "ac") {
