@@ -21,10 +21,10 @@
             <h3>Royals Calculator</h3>
         </div>
 
-        <div class="container text-center" id="calculator">
+        <div class="container text-center" id="calculator" style="background: url('/static/images/calculator.png') no-repeat">
 
             <div id="display" style="background: url('/static/images/display.png') no-repeat">
-                <div id="result"><p>0</p></div>
+                <disv id="result"><p>0</p></div>
                 <div id="previous"><p>0</p></div>
             </div>
 
