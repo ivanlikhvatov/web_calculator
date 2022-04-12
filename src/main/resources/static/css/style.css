@@ -21,7 +21,6 @@ button {
 
 
 #display {
-    background-image: url('/static/images/display.png');
     padding: 8px;
     margin:16px 12px 10px 16px;
     text-align: center;
@@ -30,7 +29,6 @@ button {
 }
 
 #calculator {
-	background-image: url('/static/images/background.png');
     max-width: 1920px;
     max-height: 1080px;
     border-radius:8px;

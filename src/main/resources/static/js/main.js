@@ -65,6 +65,10 @@ function onModeSelected() {
 		changeNotation();
 	}
 
+    if (entry === "solve-equation") {
+        solveEquation();
+    }
+
 	checkExpressionLength();
 
 	if (result.indexOf(".") !== -1) {
