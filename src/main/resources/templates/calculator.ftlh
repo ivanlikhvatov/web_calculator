@@ -15,7 +15,7 @@
 
     <body>
 
-<div class="container text-center" style="background-image: url('/static/images/background.png')">
+<div class="container text-center">
 
         <div id="header">
             <h3>Royals Calculator</h3>
@@ -41,7 +41,7 @@
                         <button class="btn small-btn" value="7" id="seven" style="background-image: url('/static/images/seven.png')"></button>
                         <button class="btn small-btn" value="8" id="eight" style="background-image: url('/static/images/eight.png')"></button>
                         <button class="btn small-btn" value="9" id="nine" style="background-image: url('/static/images/nine.png')"></button>
-                        <button class="btn small-btn" value="*" id="multi" ></button>
+                        <button class="btn small-btn" value="*" id="multi" style="background-image: url('/static/images/multi.png')"></button>
                         <button class="btn notation-btn" value="10 -> 2" id="decimalToBin" style="background-image: url('/static/images/decimalToBin.png')"></button>
                     </div>
                     <div class="row justify-content-md-center">
@@ -52,11 +52,11 @@
                         <button class="btn notation-btn" value="16 -> 10" id="hexToDecimal" style="background-image: url('/static/images/hexToDecimal.png')"></button>
                     </div>
                     <div class="row justify-content-md-center">
-                        <button class="btn small-btn" value="1" id="one" style="background-image: url('/static/images/one.png')">1</button>
-                        <button class="btn small-btn" value="2" id="two" style="background-image: url('/static/images/two.png')">2</button>
-                        <button class="btn small-btn" value="3" id="three" style="background-image: url('/static/images/three.png')">3</button>
-                        <button class="btn small-btn" value="+" id="plus">+</button>
-                        <button class="btn notation-btn" value="10 -> 16" id="decimalToHex">10 -> 16</button>
+                        <button class="btn small-btn" value="1" id="one" style="background-image: url('/static/images/one.png')"></button>
+                        <button class="btn small-btn" value="2" id="two" style="background-image: url('/static/images/two.png')"></button>
+                        <button class="btn small-btn" value="3" id="three" style="background-image: url('/static/images/three.png')"></button>
+                        <button class="btn small-btn" value="+" id="plus"></button>
+                        <button class="btn notation-btn" value="10 -> 16" id="decimalToHex"></button>
                     </div>
                     <div class="row justify-content-md-center">
                         <button class="btn small-btn" value="0" id="zero" style="background-image: url('/static/images/zero.png')"></button>
@@ -70,7 +70,7 @@
 
                 <div class="col-md-auto d-grid gap-2">
                     <div class="row justify-content-md-center">
-                        <button class="btn solve-equation-btn" value="solve-equation">Решить ур-ие</button>
+                        <button class="btn solve-equation-btn" value="solve-equation" style="background-image: url('/static/images/solve.png')"></button>
                     </div>
                 </div>
             </div>
