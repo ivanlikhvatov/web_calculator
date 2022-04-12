@@ -30,6 +30,8 @@ $(document).ready(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
 		onModeSelected();
     })
+
+    $(document).addEventListener('keydown', onKeyDown);
 })
 
 function onModeSelected() {
@@ -70,8 +72,13 @@ function onModeSelected() {
 	}
 
     if (entry === "solve-equation") {
-        alert('Включен режим уравнений. Используйте ввод с клавиатуры')
-        isEquationMode = true;
+        if (!isEquationMode) {
+            alert('Включен режим уравнений. Используйте ввод с клавиатуры')
+            isEquationMode = true;
+        } else {
+            alert('Включен обычный режим.')
+            isEquationMode = false;
+        }
     }
 
 	checkExpressionLength();
@@ -80,8 +87,6 @@ function onModeSelected() {
 		result = result.truncate()
 	}
 }
-
-$(document).addEventListener('keydown', onKeyDown);
 
 function onKeyDown(key) {
     if (!isEquationMode) {
