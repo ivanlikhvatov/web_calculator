@@ -22,7 +22,7 @@ var notationOperationsArray = ["10 -> 2", "2 -> 10", "16 -> 10", "10 -> 16", "16
 
 var delZeroPattern = "/.*/0[.]*[0]*[/*\\-+].*/";
 
-const eq = document.getElementById('eq');
+var eq;
 
 //TODO не дает писать много нулей после точки и вообще нули
 
@@ -32,9 +32,10 @@ $(document).ready(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
 		onModeSelected();
     })
-})
 
-eq.addEventListener('keydown', onKeyDown);
+    eq = document.getElementById('eq');
+    eq.addEventListener('keydown', onKeyDown);
+})
 
 function onModeSelected() {
 	if (entry === "ac") {
