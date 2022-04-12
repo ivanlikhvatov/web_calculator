@@ -15,7 +15,7 @@ button {
 }
 
 #display {
-    background: #bcbcbc;
+    background-image: url(../../images/display.png);
     padding: 8px;
     margin:16px 12px 10px 16px;
     text-align: center;
@@ -24,7 +24,7 @@ button {
 }
 
 #calculator {
-    background: chocolate;
+    background-image: url(../../images/background.png);
     max-width: 600px;
     border-radius:8px;
     padding: 8px;
@@ -37,4 +37,96 @@ button {
 #result,
 #previous {
     text-align: right;
+}
+
+#ac {
+    background-image: url(../../images/ac.png);
+}
+
+#binToDecimal {
+	background-image: url(../../images/binToDecimal.png);
+}
+
+#ce {
+	background-image: url(../../images/ce.png);
+}
+
+#decimalToBin {
+	background-image: url(../../images/decimalToBin.png);
+}
+
+#decimalToHex {
+	background-image: url(../../images/decimalToHex.png);
+}
+
+#divide {
+	background-image: url(../../images/divide.png);
+}
+
+#eight {
+	background-image: url(../../images/eight.png);
+}
+
+#equal {
+	background-image: url(../../images/equal.png);
+}
+
+#exp {
+	background-image: url(../../images/exp.png);
+}
+
+#five {
+	background-image: url(../../images/five.png);
+}
+
+#four {
+	background-image: url(../../images/four.png);
+}
+
+#hexToBin {
+	background-image: url(../../images/hexToBin.png);
+}
+
+#hexToDecimal {
+	background-image: url(../../images/hexToDecimal.png);
+}
+
+#minus {
+	background-image: url(../../images/minus.png);
+}
+
+#nine {
+	background-image: url(../../images/nine.png);
+}
+
+#one {
+	background-image: url(../../images/one.png);
+}
+
+#pi {
+	background-image: url(../../images/pi.png);
+}
+
+#plus {
+	background-image: url(../../images/plus.png);
+}
+
+#seven {
+	background-image: url(../../images/seven.png);
+}
+
+#six {
+	background-image: url(../../images/six.png);
+}
+
+#three {
+	background-image: url(../../images/three.png);
+}
+
+#two {
+	background-image: url(../../images/two.png);
+}
+
+#zero {
+	background-image: url(../../images/zero.png);
 }
