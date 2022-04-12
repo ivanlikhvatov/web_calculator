@@ -156,7 +156,9 @@ function deleteLastNum() {
 function solveNumbersOperation() {
     //TODO сделать проверку при делении на ноль (0./0.0; 0./0.; )
 
-    isExpressionValid();
+    if(!isExpressionValid()){
+        return;
+    }
 
 
     result = eval(expression);
@@ -392,13 +394,15 @@ function isExpressionValid() {
     if (operationSymbolsArray.indexOf(lastSymbol) !== -1) {
         return false;
     }
+    // "/.*/0[.]*[0]*[/*\\-+].*/"
+    var tmp = expression;
 
-    console.log(delZeroPattern.test(expression))
-
-    if (delZeroPattern.test(expression)) {
+    if (tmp.match( "^.*/0[.]*[0]*$") !== null || tmp.match( ".*/0[.]*[0]*[+\\-*/]") !== null) {
         deleteAll();
-        $('#result p').html("Делить на ноль запрещено законом французского королевства!");
-        $('#previous p').html("Король расстроен :-(");
+        $('#result p').html("Король расстроен :-(");
+        $('#previous p').html("Делить на ноль запрещено законами королевства!");
         return false;
     }
+
+    return true;
 }
