@@ -3,7 +3,8 @@ button {
 }
 
 .small-btn {
-    width: 62px;
+    width: 49px;
+    height: 30px;
 }
 
 .notation-btn {
@@ -11,11 +12,16 @@ button {
 }
 
 .solve-equation-btn {
-    height: 205px;
+    width: 120px;
+    height: 189px;
 }
 
+/*.abra {*/
+/*	background-image: url();*/
+/*}*/
+
+
 #display {
-    background: #bcbcbc;
     padding: 8px;
     margin:16px 12px 10px 16px;
     text-align: center;
@@ -24,7 +30,6 @@ button {
 }
 
 #calculator {
-    background: chocolate;
     max-width: 600px;
     border-radius:8px;
     padding: 8px;

@@ -11,15 +11,23 @@ const VALUE_ATTRIBUTE = "value";
 var expression = "0";
 var entry = "";
 var currentNumber = "0";
-var result = "";
+var result = "0";
 var reset = false;
+var isEquationMode = false;
 
 var currentNotation = DECIMAL;
 
 var operationSymbolsArray = ["/", "*", "-", "+", "."];
 var notationOperationsArray = ["10 -> 2", "2 -> 10", "16 -> 10", "10 -> 16", "16 -> 2"];
 
+var delZeroPattern = "/.*/0[.]*[0]*[/*\\-+].*/";
+
+var eq;
+
 $(document).ready(function() {
+
+    eq = document.getElementById('eq');
+    eq.onkeydown = onKeyDown;
 
     $(BUTTON).click(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
@@ -33,7 +41,6 @@ $(document).ready(function() {
 function onModeSelected() {
 	if (entry === "ac") {
 		deleteAll();
-		deleteLastNum();
 		return;
 	}
 
@@ -68,6 +75,16 @@ function onModeSelected() {
 		changeNotation();
 	}
 
+    if (entry === "solve-equation") {
+        if (!isEquationMode) {
+            alert('Включен режим уравнений. Используйте ввод с клавиатуры')
+            isEquationMode = true;
+        } else {
+            alert('Включен обычный режим.')
+            isEquationMode = false;
+        }
+    }
+
 	checkExpressionLength();
 
 	if (result.indexOf(".") !== -1) {
@@ -75,9 +92,11 @@ function onModeSelected() {
 	}
 }
 
-document.addEventListener('keydown', onKeyDown);
-
 function onKeyDown(key) {
+    /*if (!isEquationMode) {
+        return;
+    }*/
+
 	switch (key.code) {
 		case "Digit1": {
             alert("1");
@@ -90,24 +109,38 @@ function onKeyDown(key) {
         }
 	}
 
+    alert(entry)
+
 	onModeSelected();
 }
 
 function deleteAll() {
-    entry = "";
-    expression = "";
-    result = "";
-    currentNumber = "";
+    entry = "0";
+    expression = "0";
+    result = "0";
+    currentNumber = "0";
+    currentNotation = DECIMAL;
     $('#result p').html(entry);
     $('#previous p').html(expression);
 }
 
 function deleteLastNum() {
+    if (currentNotation !== DECIMAL) {
+        alert("Сначала переведите в десятичную сс");
+        return;
+    }
+
+    const lastSymbol = expression[expression.length - 1]
+
+    if (operationSymbolsArray.indexOf(lastSymbol) !== -1) {
+        return;
+    }
+
     if (expression.length > 1) {
         expression = expression.slice(0, -1);
         $('#previous p').html(expression);
     } else {
-        expression = 0;
+        expression = "0";
         $('#result p').html("");
     }
 
@@ -118,12 +151,19 @@ function deleteLastNum() {
         $('#result p').html(currentNumber);
     }
     else {
-        currentNumber = 0;
-        $('#result p').html("");
+        currentNumber = "0";
+        $('#result p').html("0");
     }
 }
 
 function solveNumbersOperation() {
+    //TODO сделать проверку при делении на ноль (0./0.0; 0./0.; )
+
+    if(!isExpressionValid()){
+        return;
+    }
+
+
     result = eval(expression);
     $('#result p').html(result);
     expression += "="+result;
@@ -137,14 +177,20 @@ function solveNumbersOperation() {
 function addOperationSymbolOrPoint() {
     if (entry !== ".") {
         reset = false;
-        if (currentNumber === 0 || expression === 0) {
-            currentNumber = 0;
+        if ((currentNumber === 0 || expression === 0 || currentNumber === "0" || expression === "0") && entry === "-") {
+        // if (currentNumber === 0 || expression === 0) {
+            currentNumber = "";
             expression = entry;
         }
         else {
             currentNumber = "";
             expression += entry;
         }
+
+        if (expression === entry ) {
+            $('#result p').html(expression);
+        }
+
         $('#previous p').html(expression);
     }
     else if (currentNumber.indexOf(".") === -1) {
@@ -164,13 +210,15 @@ function addOperationSymbolOrPoint() {
 
 function processNumber() {
 
-    if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && entry === "0"){
+    if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && entry === "0" && currentNumber.indexOf(".") === -1){
         return;
     }
 
-    if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && !isNaN(entry)){
-        currentNumber = "";
+    console.log(entry !== "0")
+    console.log(currentNumber.indexOf("."))
 
+    if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && !isNaN(entry) && entry !== "0" && currentNumber.indexOf(".") === -1){
+        currentNumber = "";
         if (expression.length <= 1) {
             expression = "";
         }
@@ -181,12 +229,21 @@ function processNumber() {
         currentNumber = entry;
         reset = false;
     } else {
-        expression += entry;
-        currentNumber += entry;
+
+        if (expression === "-"){
+            expression += entry;
+            currentNumber = expression;
+        } else {
+            expression += entry;
+            currentNumber += entry;
+        }
+
     }
 
     $('#previous p').html(expression);
     $('#result p').html(currentNumber);
+
+    // console.log("currentNumber: " + currentNumber)
 }
 
 function addConstNumber() {
@@ -331,4 +388,24 @@ function convertToDecimal(value, base = 2) {
     return parseInt(integer, base) + (integer[0] !== '-' || -1) * fraction
         .split('')
         .reduceRight((r, a) => (r + parseInt(a, base)) / base, 0);
+}
+
+
+function isExpressionValid() {
+    const lastSymbol = expression[expression.length - 1]
+
+    if (operationSymbolsArray.indexOf(lastSymbol) !== -1) {
+        return false;
+    }
+
+    var tmp = expression;
+
+    if (tmp.match( "^.*/0[.]*[0]*$") !== null || tmp.match( ".*/0[.]*[0]*[+\\-*/]") !== null) {
+        deleteAll();
+        $('#result p').html("Король расстроен :-(");
+        $('#previous p').html("Делить на ноль запрещено законами королевства!");
+        return false;
+    }
+
+    return true;
 }
