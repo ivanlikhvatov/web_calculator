@@ -18,7 +18,7 @@
 <div class="container text-center">
 
         <div id="header">
-            <h3>Royals Calculator 3</h3>
+            <h3>Calculatrice Royale</h3>
         </div>
 
         <div class="container text-center" id="calculator" style="background: url('/static/images/calculator.png') no-repeat">
@@ -27,8 +27,6 @@
                 <div id="result"><p>0</p></div>
                 <div id="previous"><p>0</p></div>
             </div>
-
-            <input placeholder="asdasda" size="40">
 
             <div class="row justify-content-md-center">
                 <div class="col-md-auto">

@@ -102,12 +102,16 @@ function onKeyDown(key) {
 			entry = 1;
 		}
 
+		case 'KeyX': {
+			entry = 2;
+		}
+
 		default: {
             entry = 5;
         }
 	}
 
-    alert(entry)
+    alert(`${key.code}`);
 
 	onModeSelected();
 }
