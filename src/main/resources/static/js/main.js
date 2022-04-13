@@ -26,8 +26,8 @@ var eq;
 
 $(document).ready(function() {
 
-    eq = document.getElementById('eq');
-    eq.onkeydown = onKeyDown;
+    //eq = document.getElementById('eq');
+    //eq.onkeydown = onKeyDown;
 
     $(BUTTON).click(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
@@ -99,12 +99,10 @@ function onKeyDown(key) {
 
 	switch (key.code) {
 		case "Digit1": {
-            alert("1");
 			entry = 1;
 		}
 
 		default: {
-			alert("5");
             entry = 5;
         }
 	}
