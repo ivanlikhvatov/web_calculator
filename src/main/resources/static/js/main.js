@@ -22,20 +22,19 @@ var notationOperationsArray = ["10 -> 2", "2 -> 10", "16 -> 10", "10 -> 16", "16
 
 var delZeroPattern = "/.*/0[.]*[0]*[/*\\-+].*/";
 
-var eq;
+var input;
+var keys = [];
 
 $(document).ready(function() {
-
-    //eq = document.getElementById('eq');
-    //eq.onkeydown = onKeyDown;
 
     $(BUTTON).click(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
 		onModeSelected();
     })
 
-    var input = document.querySelector('input');
-    input.addEventListener('keydown', onKeyDown);
+    input = document.querySelector('input');
+    input.addEventListener('keyup', onKeyUp);
+	input.addEventListener('keydown', onKeyDown);
 })
 
 function onModeSelected() {
@@ -61,6 +60,8 @@ function onModeSelected() {
 
 	if (!isNaN(entry)) {
 		processNumber();
+	} else {
+		processWord();
 	}
 
 	if (entry === "="){
@@ -93,25 +94,118 @@ function onModeSelected() {
 }
 
 function onKeyDown(key) {
-    /*if (!isEquationMode) {
+	if (!isEquationMode) {
         return;
-    }*/
+    }
+
+	var code = key.which;
+
+	if (keys.indexOf(code) < 0) {
+        keys.push(code);
+    }
+}
+
+function onKeyUp(key) {
+    if (!isEquationMode) {
+        return;
+    }
+
+	if (keys[0] === 'ShiftLeft') {
+		if (keys[1] === 'Digit6') {
+			entry = "^";
+			keys.splice(keys.indexOf(key.which),1);
+			onModeSelected();
+			return;
+		} else if (keys[1] === 'Equal') {
+			entry = "+";
+			keys.splice(keys.indexOf(key.which),1);
+			onModeSelected();
+			return;
+		} else if (keys[1] === 'Digit8') {
+			entry = "*";
+			keys.splice(keys.indexOf(key.which),1);
+			onModeSelected();
+			return;
+		}
+	}
+
+	keys.splice(keys.indexOf(key.which),1);
 
 	switch (key.code) {
-		case "Digit1": {
+		case 'Digit0': {
+			entry = 0;
+			break;
+		}
+
+		case 'Digit1': {
 			entry = 1;
+			break;
+		}
+
+		case 'Digit2': {
+			entry = 2;
+			break;
+		}
+
+		case 'Digit3': {
+			entry = 3;
+			break;
+		}
+
+		case 'Digit4': {
+			entry = 4;
+			break;
+		}
+
+		case 'Digit5': {
+			entry = 5;
+			break;
+		}
+
+		case 'Digit6': {
+			entry = 6;
+			break;
+		}
+
+		case 'Digit7': {
+			entry = 7;
+			break;
+		}
+
+		case 'Digit8': {
+			entry = 8;
+			break;
+		}
+
+		case 'Digit9': {
+			entry = 9;
+			break;
 		}
 
 		case 'KeyX': {
-			entry = 2;
+			entry = "x";
+			break;
+		}
+
+		case 'Minus': {
+			entry = "-";
+			break;
+		}
+
+		case 'Backspace': {
+			entry = "ce";
+			break;
+		}
+
+		case 'Slash': {
+			entry = "/";
+			break;
 		}
 
 		default: {
-            entry = 5;
-        }
+			return;
+		}
 	}
-
-    alert(`${key.code}`);
 
 	onModeSelected();
 }
@@ -208,6 +302,44 @@ function addOperationSymbolOrPoint() {
         $('#result p').html(currentNumber);
         $('#previous p').html(expression);
     }
+}
+
+function processWord() {
+
+    if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && entry === "0" && currentNumber.indexOf(".") === -1){
+        return;
+    }
+
+    console.log(entry !== "0")
+    console.log(currentNumber.indexOf("."))
+
+    if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && !isNaN(entry) && entry !== "0" && currentNumber.indexOf(".") === -1){
+        currentNumber = "";
+        if (expression.length <= 1) {
+            expression = "";
+        }
+    }
+
+    if (reset) {
+        expression = entry;
+        currentNumber = entry;
+        reset = false;
+    } else {
+
+        if (expression === "-"){
+            expression += entry;
+            currentNumber = expression;
+        } else {
+            expression += entry;
+            currentNumber += entry;
+        }
+
+    }
+
+    $('#previous p').html(expression);
+    $('#result p').html(currentNumber);
+
+    // console.log("currentNumber: " + currentNumber)
 }
 
 function processNumber() {

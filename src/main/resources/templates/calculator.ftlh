@@ -21,6 +21,8 @@
             <h3>Calculatrice Royale</h3>
         </div>
 
+        <input placeholder="asd" size="40">
+
         <div class="container text-center" id="calculator" style="background: url('/static/images/calculator.png') no-repeat">
 
             <div id="display" style="background: url('/static/images/display.png') no-repeat">
