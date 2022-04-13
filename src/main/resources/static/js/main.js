@@ -25,6 +25,9 @@ $(document).ready(function() {
         entry = $(this).attr(VALUE_ATTRIBUTE);
 		onModeSelected();
     })
+
+    var input = document.querySelector('input');
+    input.addEventListener('keydown', onKeyDown);
 })
 
 function onModeSelected() {
@@ -77,10 +80,12 @@ document.addEventListener('keydown', onKeyDown);
 function onKeyDown(key) {
 	switch (key.code) {
 		case "Digit1": {
+            alert("1");
 			entry = 1;
 		}
 
 		default: {
+			alert("5");
             entry = 5;
         }
 	}
