@@ -18,10 +18,10 @@
 <div class="container text-center">
 
         <div id="header">
-            <h3>Calculatrice Royale</h3>
+            <h3>Calculatrice Royale 2</h3>
         </div>
 
-        <input placeholder="asd" size="40">
+        <input class="inp" placeholder="Нажмите здесь, чтобы использовать клавиатуру" size="60">
 
         <div class="container text-center" id="calculator" style="background: url('/static/images/calculator.png') no-repeat">
 

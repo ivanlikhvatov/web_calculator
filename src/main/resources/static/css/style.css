@@ -20,6 +20,10 @@ button {
 /*	background-image: url();*/
 /*}*/
 
+.inp {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
 
 #display {
     padding: 8px;

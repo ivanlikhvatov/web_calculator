@@ -14,6 +14,7 @@ var currentNumber = "0";
 var result = "0";
 var reset = false;
 var isEquationMode = false;
+var isEquationResult = false;
 
 var currentNotation = DECIMAL;
 
@@ -58,21 +59,25 @@ function onModeSelected() {
 		return;
 	}
 
+	if (entry === "=") {
+		if (isEquationMode) {
+			solveEquation();
+		} else {
+			solveNumbersOperation();
+		}
+	}
+
 	if (!isNaN(entry)) {
 		processNumber();
 	} else {
 		processWord();
 	}
 
-	if (entry === "="){
-		solveNumbersOperation();
-	}
-
-	if (operationSymbolsArray.indexOf(entry) !== -1) {
+	if (operationSymbolsArray.indexOf(entry) !== -1 && !isEquationMode) {
 		addOperationSymbolOrPoint();
 	}
 
-	if (notationOperationsArray.indexOf(entry) !== -1) {
+	if (notationOperationsArray.indexOf(entry) !== -1 && !isEquationMode) {
 		changeNotation();
 	}
 
@@ -98,11 +103,10 @@ function onKeyDown(key) {
         return;
     }
 
-	var code = key.which;
+	input.value = "";
+	input.placeholder = "Нажмите здесь, чтобы использовать клавиатуру";
 
-	if (keys.indexOf(code) < 0) {
-        keys.push(code);
-    }
+    keys.push(key.code);
 }
 
 function onKeyUp(key) {
@@ -113,23 +117,23 @@ function onKeyUp(key) {
 	if (keys[0] === 'ShiftLeft') {
 		if (keys[1] === 'Digit6') {
 			entry = "^";
-			keys.splice(keys.indexOf(key.which),1);
+			keys.length = 0;
 			onModeSelected();
 			return;
 		} else if (keys[1] === 'Equal') {
 			entry = "+";
-			keys.splice(keys.indexOf(key.which),1);
+			keys.length = 0;
 			onModeSelected();
 			return;
 		} else if (keys[1] === 'Digit8') {
 			entry = "*";
-			keys.splice(keys.indexOf(key.which),1);
+			keys.length = 0;
 			onModeSelected();
 			return;
 		}
 	}
 
-	keys.splice(keys.indexOf(key.which),1);
+	keys.length = 0;
 
 	switch (key.code) {
 		case 'Digit0': {
@@ -203,7 +207,8 @@ function onKeyUp(key) {
 		}
 
 		default: {
-			return;
+			entry = "";
+			break;
 		}
 	}
 
@@ -211,6 +216,7 @@ function onKeyUp(key) {
 }
 
 function deleteAll() {
+	isEquationMode = false;
     entry = "0";
     expression = "0";
     result = "0";
@@ -252,15 +258,153 @@ function deleteLastNum() {
     }
 }
 
+function solveEquation() {
+	if (!isEquationMode) {
+		return;
+	}
+
+	let findXSquare = -1;
+
+	for (let i = 0; expression[i] !== "x" && expression[i + 1] !== "^" && expression[i + 2] !== "2"; i++) {
+		findXSquare = i;
+	}
+
+	console.log("findXSquare = " + findXSquare);
+
+	let ax = "";
+
+	if (expression[0] === "x" && expression[1] === "^" && expression[2] === "2") {
+		findXSquare = 0;
+		ax = "1";
+	} else {
+		for (let i = 0; i <= findXSquare; i++) {
+			if (expression[i] === "+" || expression[i] === "*" || expression[i] === "/") {
+				continue;
+			}
+
+			ax += expression[i];
+		}
+	}
+
+	if (findXSquare == -1) {
+		$('#result p').html("Отсутствует x^2");
+		expression += "=" + result;
+		$('#previous p').html(expression);
+		expression = result;
+		entry = result;
+		currentNumber = result;
+		reset = true;
+		return;
+	}
+
+	console.log(ax);
+
+	let findX = -1;
+
+	for (let i = findXSquare + 2; expression[i] !== "x"; i++) {
+		findX = i;
+	}
+
+	console.log("findX = " + findX);
+
+	let bx = "";
+
+	if (expression[findXSquare + 4] === "x") {
+		findX = 0;
+		bx = "1";
+	} else {
+		for (let i = findXSquare + 4; i <= findX; i++) {
+			if (expression[i] === "+" || expression[i] === "*" || expression[i] === "/") {
+				continue;
+			}
+
+			bx += expression[i];
+		}
+	}
+
+	if (findX == -1) {
+		$('#result p').html("Отсутствует x");
+		expression += "=" + result;
+		$('#previous p').html(expression);
+		expression = result;
+		entry = result;
+		currentNumber = result;
+		reset = true;
+		return;
+	}
+
+	console.log(bx);
+
+	let findC = -1;
+
+	for (let i = findX; i < expression.length; i++) {
+		findC = i;
+	}
+
+	if (findC == -1) {
+		$('#result p').html("Отсутствует свободный член C");
+		expression += "=" + result;
+		$('#previous p').html(expression);
+		expression = result;
+		entry = result;
+		currentNumber = result;
+		reset = true;
+		return;
+	}
+
+	let c = "";
+
+	for (let i = findX + 2; i <= findC; i++) {
+		if (expression[i] === "+" || expression[i] === "*" || expression[i] === "/") {
+			continue;
+		}
+
+		c += expression[i];
+	}
+
+	console.log(parseInt(c, 10));
+
+	let d;
+
+	d = parseInt(bx, 10) * parseInt(bx, 10) - 4 * parseInt(ax, 10) * parseInt(c, 10);
+
+	console.log(parseInt(d, 10));
+
+	let r1, r2;
+
+	if (d < 0) {
+		result = "Нет корней";
+	} else if (d == 0) {
+		r1 = (-parseInt(bx, 10) + Math.sqrt(d)) / (2 * parseInt(ax, 10));
+		result = "x = " + r1.toFixed(2);
+	} else {
+		r1 = (-parseInt(bx, 10) + Math.sqrt(d)) / (2 * parseInt(ax, 10));
+		r2 = (-parseInt(bx, 10) - Math.sqrt(d)) / (2 * parseInt(ax, 10));
+		result = "x1 = " + r1.toFixed(2) + ", x2 = " + r2.toFixed(2);
+	}
+
+	console.log(result);
+
+	$('#result p').html(result);
+	expression += "=" + result;
+	$('#previous p').html(expression);
+	expression = result;
+    entry = result;
+    currentNumber = result;
+    reset = true;
+	isEquationResult = true;
+}
+
 function solveNumbersOperation() {
     //TODO сделать проверку при делении на ноль (0./0.0; 0./0.; )
 
-    if(!isExpressionValid()){
+    if (!isExpressionValid()){
         return;
     }
 
-
+	console.log(expression);
     result = eval(expression);
+	console.log(result);
     $('#result p').html(result);
     expression += "="+result;
     $('#previous p').html(expression);
@@ -277,10 +421,13 @@ function addOperationSymbolOrPoint() {
         // if (currentNumber === 0 || expression === 0) {
             currentNumber = "";
             expression = entry;
-        }
-        else {
+			console.log("1 exp " + expression);
+			console.log("1 entry " + entry);
+        } else {
             currentNumber = "";
-            expression += entry;
+            //expression += entry;
+			console.log("2 exp " + expression);
+			console.log("2 entry " + entry);
         }
 
         if (expression === entry ) {
@@ -310,8 +457,8 @@ function processWord() {
         return;
     }
 
-    console.log(entry !== "0")
-    console.log(currentNumber.indexOf("."))
+    //console.log(entry !== "0")
+    //console.log(currentNumber.indexOf("."))
 
     if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && !isNaN(entry) && entry !== "0" && currentNumber.indexOf(".") === -1){
         currentNumber = "";
@@ -348,8 +495,8 @@ function processNumber() {
         return;
     }
 
-    console.log(entry !== "0")
-    console.log(currentNumber.indexOf("."))
+    //console.log(entry !== "0")
+    //console.log(currentNumber.indexOf("."))
 
     if (currentNumber.length > 0 && currentNumber[currentNumber.length - 1] === "0" && !isNaN(entry) && entry !== "0" && currentNumber.indexOf(".") === -1){
         currentNumber = "";
@@ -402,6 +549,11 @@ function checkExpressionLength() {
     if (currentNotation !== DECIMAL) {
         return;
     }
+
+	if (isEquationResult) {
+		isEquationResult = false;
+		return;
+	}
 
     if (currentNumber.length > 10 || expression.length > 26) {
         $("#result p").html("0");
